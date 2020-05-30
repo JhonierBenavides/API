@@ -18,7 +18,7 @@ BEGIN
 		SET
 			NAME=_name,
 			salary=_salary
-			WHERE id=id;
+			WHERE id=_id;
 	END IF;
     
     SELECT _id AS 'id';
