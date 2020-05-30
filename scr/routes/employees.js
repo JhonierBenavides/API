@@ -46,4 +46,23 @@ router.post('/', (req, res) => {
 
 });
 
+//Update
+router.put('/:id', (req, res) => {
+  const { name, salary } = req.body;
+  const { id } = req.params;
+  const query = `
+    SET @id = ?;
+    SET @name = ?;
+    SET @salary = ?;
+    CALL employeesAddOrEdit(@id, @name, @salary);
+  `;
+  mysqlConnection.query(query, [id, name, salary], (err, rows, fields) => {
+    if(!err) {
+      res.json({status: 'Employee Updated'});
+    } else {
+      console.log(err);
+    }
+  });
+});
+
 module.exports = router;
